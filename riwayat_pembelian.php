@@ -40,21 +40,21 @@ while ($row = mysqli_fetch_assoc($query)) {
 <body>
 
 <!-- HEADER -->
-    <header>
-        <div class="container">
-        <div class="logo">
-            <img src="image/Togame.jpg" alt="Togame Store Logo" />
-        </div>
-        <nav>
-            <ul>
-            <li><a href="./homepage.php">Beranda</a></li>
-            <li><a href="keranjang.php">Keranjang</a></li>
-            <li><a href="riwayat_pembelian.php" class="active">Riwayat Pembelian</a></li>
-            <li><a href="./profil.php">Profil</a></li>
-            </ul>
-        </nav>
-        </div>
-    </header>
+<header>
+    <div class="container">
+      <div class="logo">
+          <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
+      </div>
+      <nav>
+          <ul>
+          <li><a href="./homepage.php">Beranda</a></li>
+          <li><a href="keranjang.php">Keranjang</a></li>
+          <li><a href="riwayat_pembelian.php" class="active">Riwayat Pembelian</a></li>
+          <li><a href="./profil.php">Profil</a></li>
+          </ul>
+      </nav>
+    </div>
+</header>
 
 <main class="container history">
   <h2>Riwayat Pembelian</h2>

@@ -1,13 +1,46 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #0d0d0d;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/* RESET & DASAR */
+* { 
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;  
 }
 
+/* KHUSUS UNTUK PROFILE, KASIH FLEX KARENA KONTEN TERLALU SEDIKIT BIAR FOOTER GA NAIK */
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0d0d0d;
+  line-height: 1.4;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* SET KONTEN UTAMA MENGISI RUANG YANG TERSEDIA */
+.main-content-settingers {
+  flex: 1 0 auto; /* Mengisi ruang yang tersedia */
+}
+
+/* CONTAINER */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container1 {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10%;
+}
+
+/* HEADER */
 header {
   background: #0d0d0d;
   padding: 20px 0;
@@ -15,42 +48,41 @@ header {
 
 header .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
+/* LINK & GRADIENT TEXT */
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.gradient-text {
+    background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* LOGO AND IMG */
 .logo img {
   height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 50px;
 }
 
 nav ul {
   display: flex;
   gap: 30px;
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
-nav a {
-  font-weight: 500;
-  text-decoration: none;
-  color: white;
-}
-
-nav a.active {
-  font-weight: 700;
-}
-
-
+nav a { font-weight: 500; }
+nav a.active { font-weight: 700; }
 .user-info {
   display: flex;
   align-items: center;
-}
-
-.saldo {
-  margin-right: 10px;
+  gap: 15px;
 }
 
 .avatar {
@@ -116,12 +148,12 @@ nav a.active {
 }
 
 footer {
-  margin-top: auto;
+  flex-shrink: 0; /* Mencegah footer menyusut */
+
   text-align: center;
-  padding: 20px 0;
+  padding: 40px 0 20px;
   color: #888;
   font-size: .9rem;
-  background-color: #000;
 }
 
 .gradient-text {
@@ -139,6 +171,7 @@ footer {
   list-style: none;
   margin: 15px 0;
 }
+
 .footer-nav ul a {
   color: #ffffff70;
   text-decoration: none;

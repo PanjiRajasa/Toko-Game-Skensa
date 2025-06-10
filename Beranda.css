@@ -1,14 +1,18 @@
 /* RESET & DASAR */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;  
+}
+
 body {
   background: #0d0d0d;
   color: #fff;
   font-family: 'Poppins', sans-serif;
   line-height: 1.4;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
+
+/* CONTAINER */
 .container {
   width: 90%;
   max-width: 1200px;
@@ -20,7 +24,7 @@ body {
     max-width: 1200px;
     margin: auto;
     margin-top: 10%;
-  }
+}
 
 
 /* HEADER */
@@ -36,38 +40,42 @@ header .container {
 }
 
 /* LINK & GRADIENT TEXT */
-a { text-decoration: none; color: inherit; }
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
 .gradient-text {
     background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
+}
 
-
+/* LOGO AND IMG */
 .logo img {
   height: 50px;
   width: 50px;
   border-radius: 50px;
 }
+
 nav ul {
   display: flex;
   gap: 30px;
   list-style: none;
 }
-nav a { font-weight: 500; }
-nav a.active { font-weight: 700; }
+
+nav a { 
+  font-weight: 500; 
+}
+
+nav a.active { 
+  font-weight: 700; 
+}
+
 .user-info {
   display: flex;
   align-items: center;
   gap: 15px;
-}
-.user-info .coins {
-  font-size: 0.95rem;
-}
-.user-info .avatar img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
 }
 
 /* HERO */
@@ -148,8 +156,13 @@ section .subtitle {
 .card p { font-size: .95rem; }
 
 /* SPESIAL: REKOMENDASI VS LIST */
-.rekomendasi .card .info { background: #f2f2f2; }
-.list-game .card .info { background: #5b9eff; }
+.rekomendasi .card .info { 
+  background: #f2f2f2; 
+}
+
+.list-game .card .info { 
+  background: #5b9eff; 
+}
 
 /* FOOTER */
 footer {
@@ -159,18 +172,33 @@ footer {
     color: #888;
     font-size: .9rem;
   }
-  .gradient-text {
-    background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .white-text { color: #fff; }
-  .yellow-text { color: #FFCC33; /* sesuai gradient akhir atau sesuaikan ke #f7c600 */ }
   
-  .footer-nav ul { display: flex; justify-content: center; gap: 20px; list-style: none; margin: 15px 0; }
-  .footer-nav ul a:hover {
-    color: #3b82f6;
-  }
+.gradient-text {
+  background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.white-text { 
+  color: #fff; 
+}
+
+.yellow-text { 
+  color: #FFCC33; 
+}
+  
+.footer-nav ul { 
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
+  list-style: none; 
+  margin: 15px 0; 
+}
+
+.footer-nav ul a:hover {
+  color: #3b82f6;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .hero { padding: 40px 0; }

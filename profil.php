@@ -51,54 +51,58 @@ $user = mysqli_fetch_assoc($result);
 </head>
 <body>
 
-  <!-- HEADER -->
+<!-- KHUSUS UNTUK PROFILE, DIV YANG DIDESAIN MENCEGAH FOOTER NAIK (KONTEN PROFILE KEDIKITAN SOALNYA) -->
+<div class="main-content-settingers">
+    <!-- HEADER -->
     <header>
         <div class="container">
         <div class="logo">
-            <img src="image/Togame.jpg" alt="Togame Store Logo" />
+            <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
         </div>
         <nav>
             <ul>
-            <li><a href="./homepage.php">Beranda</a></li>
-            <li><a href="keranjang.php">Keranjang</a></li>
-            <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
-            <li><a href="./profil.php" class="active">Profil</a></li>
+              <li><a href="./homepage.php">Beranda</a></li>
+              <li><a href="keranjang.php">Keranjang</a></li>
+              <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
+              <li><a href="./profil.php" class="active">Profil</a></li>
             </ul>
         </nav>
         </div>
     </header>
 
-  <main>
-    <section class="profile">
-      <img src="<?= htmlspecialchars($user['image'] ?? 'avatar.png') ?>" alt="Avatar" class="profile-img">
-      <div class="profile-text">
-        <h1><?= htmlspecialchars($user['name']) ?></h1>
-        <p class="username"> <?= htmlspecialchars($user['username']) ?> </p>
-        <button class="edit-btn" onclick="window.location.href='./editprofil.php'">EDIT PROFILE</button>
-        <a href="logout.php" class="logout-btn">LOG OUT</a>
-      </div>
-    </section>
+    <main>
+      <section class="profile">
+        <img src="<?= htmlspecialchars($user['image'] ?? 'avatar.png') ?>" alt="Avatar" class="profile-img">
+        <div class="profile-text">
+          <h1><?= htmlspecialchars($user['name']) ?></h1>
+          <p class="username"> <?= htmlspecialchars($user['username']) ?> </p>
+          <button class="edit-btn" onclick="window.location.href='./editprofil.php'">EDIT PROFILE</button>
+          <a href="logout.php" class="logout-btn">LOG OUT</a>
+        </div>
+      </section>
 
-    <section class="bio">
-      <p><?= htmlspecialchars($user['description']) ?></p>
-    </section>
-  </main>
+      <section class="bio">
+        <p><?= htmlspecialchars($user['description']) ?></p>
+      </section>
+    </main>
 
+
+  </div>
 
   <footer>
-        <h1>
-            <!-- 'T' putih, 'ogame' gradient, ' Store' putih, '!' kuning -->
-            <span class="white-text">To</span><span class="gradient-text">game</span>
-            <span class="white-text"> Store</span><span class="yellow-text">!</span>
-        </h1>
-        <nav class="footer-nav">
-            <ul>
-                <li><a href="homepage.php">Beranda</a></li>
-                <li><a href="keranjang.php">Keranjang</a></li>
-                <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
-            </ul>
-        </nav>
-        <p>&copy; 2025 Togame. Hak cipta dilindungi undang-undang.</p>
-    </footer>
+            <h1>
+                <!-- 'T' putih, 'ogame' gradient, ' Store' putih, '!' kuning -->
+                <span class="white-text">To</span><span class="gradient-text">game</span>
+                <span class="white-text"> Store</span><span class="yellow-text">!</span>
+            </h1>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="homepage.php">Beranda</a></li>
+                    <li><a href="keranjang.php">Keranjang</a></li>
+                    <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
+                </ul>
+            </nav>
+            <p>&copy; 2025 Togame. Hak cipta dilindungi undang-undang.</p>
+  </footer>
 </body>
 </html>

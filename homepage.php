@@ -43,22 +43,23 @@ $sepuluhgames = array_slice($games, 0, 10);
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <div class="logo">
-        <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
-      </div>
-      <nav>
-        <ul>
-          <li><a href="./homepage.php" class="active">Beranda</a></li>
-          <li><a href="keranjang.php">Keranjang</a></li>
-          <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
-          <li><a href="./profil.php">Profil</a></li>
-        </ul>
-      </nav>
+  
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
     </div>
-  </header>
+    <nav>
+      <ul>
+        <li><a href="./homepage.php" class="active">Beranda</a></li>
+        <li><a href="keranjang.php">Keranjang</a></li>
+        <li><a href="riwayat_pembelian.php">Riwayat Pembelian</a></li>
+        <li><a href="./profil.php">Profil</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 
   <!-- HERO -->
