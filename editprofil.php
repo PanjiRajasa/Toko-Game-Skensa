@@ -63,7 +63,7 @@ $user = mysqli_fetch_assoc($result);
     <header>
         <div class="container">
         <div class="logo">
-            <img src="image/Togame.jpg" alt="Togame Store Logo" />
+            <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
         </div>
         <nav>
             <ul>
