@@ -27,6 +27,9 @@ while ($row = mysqli_fetch_assoc($result)) {
   $games[] = $row;
   // echo $row;
 }
+
+//10 item pertama
+$sepuluhgames = array_slice($games, 0, 10);
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +77,7 @@ while ($row = mysqli_fetch_assoc($result)) {
       <p class="subtitle">Game rekomendasi untuk kamu yang gamer sejati</p>
 
       <div class="card-grid">
-        <?php foreach ($games as $row): ?>
+        <?php foreach ($sepuluhgames as $row): ?>
           <a href="game_deskripsi.php?id=<?= $row['ID'] ?>" class="card">
             <img src="<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['name']) ?>" />
             <div class="info">
