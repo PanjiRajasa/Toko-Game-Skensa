@@ -1,0 +1,164 @@
+/* ===================================================
+   RESET DASAR: hapus margin/padding default browser
+=================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Font fallback */
+}
+
+/* ===================================================
+   BODY: atur background gradasi + pola kotak-kotak
+=================================================== */
+body {
+  display: flex;                  /* flex centering konten */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;                  /* 100% tinggi layar */
+
+  background-color: #ff8ac2;      /* warna dasar pink */
+  /* layer 1: garis vertikal tipis -> pola grid */
+  /* layer 2: garis horizontal tipis -> pola grid */
+  /* layer 3: gradasi radial pink */
+  background-image:
+    radial-gradient(circle at 50% 50%, #7A7A7A, #7A7A7A);
+  background-size:
+    40px 40px,                  /* ukuran kotak grid vertikal */
+    40px 40px,                  /* ukuran kotak grid horizontal */
+    cover;                      /* gradasi menutupi seluruh area */
+}
+
+/* ===================================================
+   CONTAINER: flex layout dua panel (responsive)
+=================================================== */
+.container {
+  display: flex;                 /* dua panel berdampingan */
+  width: 90%;                    
+  max-width: 900px;              /* lebar maksimal */
+  height: 80vh;                  /* tinggi 80% viewport */
+  background: white;             /* latar putih untuk panel gabungan */
+  border-radius: 16px;           /* sudut membulat */
+  overflow: hidden;              /* sembunyikan overflow rounded corner */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2); /* bayangan halus */
+}
+
+/* ===================================================
+   PANEL KIRI (IMAGE PANEL)
+=================================================== */
+.image-panel {
+  flex: 1;                       /* proporsional 50% */
+}
+.image-panel img {
+  width: 100%;                   /* lebar penuh panel */
+  height: 100%;                  /* tinggi penuh panel */
+  object-fit:cover;             /* crop dan cover */
+}
+
+/* ===================================================
+   PANEL KANAN (FORM PANEL)
+=================================================== */
+.form-panel {
+  flex: 1;                       /* proporsional 50% */
+  position: relative;            /* agar back arrow absolut */
+  padding: 30px 25px;            /* ruang dalam panel */
+  display: flex;
+  flex-direction: column;        /* form vertikal */
+}
+
+/* — Back arrow (tombol kembali) — */
+.back {
+  position: absolute;           
+  top: 20px;                    
+  left: 20px;                   
+  font-size: 20px;              
+  color: #0069FF;               /* ungu */
+  text-decoration: none;        
+}
+
+/* — Judul utama “Login” — */
+.form-panel h1 {
+  text-align: center;
+  color: #014EDD;               /* ungu */
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+/* — Subjudul instruksi — */
+.subtitle {
+  text-align: center;           
+  font-size: 14px;
+  color: #333;                  
+  margin-bottom: 25px;
+}
+.subtitle a {
+  color: #0069FF;               /* link ungu */
+  text-decoration: none;
+}
+.subtitle a:hover {
+  text-decoration: underline;   /* efek hover */
+}
+
+/* — Form dan input fields — */
+.form-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;                    /* jarak antar elemen */
+  flex: 1;                      /* agar tombol bisa di-auto bottom */
+}
+.form-panel input {
+  padding: 12px 15px;           
+  border: 1px solid #ccc;       /* border abu terang */
+  border-radius: 6px;           
+  font-size: 14px;
+  outline: none;                
+  transition: border-color .2s; /* transisi efek fokus */
+}
+.form-panel input:focus {
+  border-color: #d100ce;        /* border berubah ungu saat fokus */
+}
+
+/* — Baris link Sign Up & Forgot Password — */
+.links-row {
+  display: flex;                
+  justify-content: space-between;
+  font-size: 12px;
+}
+.links-row a {
+  color: #0069FF;               
+  text-decoration: none;
+}
+.links-row a:hover {
+  text-decoration: underline;   
+}
+
+/* — Tombol Sign In — */
+.form-panel button {
+  margin-top: auto;             /* dorong tombol ke bawah */
+  padding: 14px;                
+  background-color: #0069FF;    /* pink cerah */
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.form-panel button:hover {
+  background-color: #e03fb8;    /* pink lebih gelap saat hover */
+}
+
+/* ===================================================
+   RESPONSIVE: tampilan mobile (<600px)
+=================================================== */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;     /* stack panel atas-bawah */
+    height: auto;               
+  }
+  .image-panel {
+    height: 200px;              /* buat panel gambar agak pendek */
+  }
+}

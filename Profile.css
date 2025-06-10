@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0d0d0d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #0d0d0d;
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+}
+
+nav a.active {
+  font-weight: 700;
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.saldo {
+  margin-right: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: #0d0d0d;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-text h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.username {
+  color: #ccc;
+  margin: 5px 0;
+}
+
+.edit-btn {
+  display: inline-block;
+  background-color: #3b82f6;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.logout-btn {
+  display: inline-block;
+  background-color: #f63b3b;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.bio {
+  background-color: #dcdcdc;
+  color: black;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px 0;
+  color: #888;
+  font-size: .9rem;
+  background-color: #000;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.white-text { color: #fff; }
+.yellow-text { color: #FFCC33; }
+
+.footer-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 15px 0;
+}
+.footer-nav ul a {
+  color: #ffffff70;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav ul a:hover {
+  color: #3b82f6;
+}
+
+@media (max-width: 600px) {
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}

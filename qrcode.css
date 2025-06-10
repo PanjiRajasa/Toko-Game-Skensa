@@ -1,0 +1,104 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  background-color: #0c0c0c;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: #000;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* QR IMAGE */
+.qr-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+  background-color: #a0c4ff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* TEXT */
+.card h3 {
+  margin-top: 10px;
+  color: #014EDD;
+}
+
+.card h4 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+/* BUTTON */
+.btn {
+  text-align: center;
+  display: inline-block;
+  background-color: #6ea8fe;
+  padding: 10px 30px;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #4d90fe;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .card {
+    padding: 16px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .qr-image {
+    max-width: 160px;
+  }
+}

@@ -1,0 +1,138 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* Hero section penuh layar */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* setinggi viewport */
+  background: url('image/Landingpage.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Overlay hitam semi-transparan */
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Navbar di atas */
+.navbar {
+  position: relative; /* agar berada di atas overlay */
+  display: flex;
+  flex-direction: row-reverse;  /* MEMBALIK URUTAN: logo di kanan, nav di kiri */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 1;
+}
+
+/* Style logo */
+.navbar .logo img {
+  height: 45px;
+  border-radius: 50px;
+  width: 45px;
+}
+
+/* Daftar menu */
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Konten hero */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  max-width: 600px;
+  margin: auto; /* center baik horizontal & vertical */
+  text-align: left;
+  padding: 20px;
+}
+
+/* Judul besar */
+.hero-content h1 {
+  font-size: 100px;
+  line-height: 1;
+}
+
+/* Ganti aturan highlight sebelumnya */
+.hero-content .highlight {
+  
+  font-family: 'Righteous', sans-serif !important;
+  /* Buat gradient horizontal dari biru ke ungu muda hingga pink */
+  background: linear-gradient(
+    to right,
+    #1192F6,
+    #8193F4,
+    #F496F3
+  );
+  /* Terapkan gradient hanya pada teks */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Jika butuh dukungan di Firefox */
+  background-clip: text;
+  color: transparent;
+  font-size: 100px;
+}
+
+/* Paragraf deskripsi */
+.hero-content p {
+  margin: 20px 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Container tombol */
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+/* Style dasar tombol */
+.btn {
+  padding: 12px 30px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+/* Tombol utama (biru tua) */
+.btn.primary {
+  background-color: #2765f1;
+  color: #fff;
+}
+
+/* Tombol kedua (biru terang) */
+.btn.secondary {
+  background-color: #1877f2;
+  color: #fff;
+}
+
+/* Efek hover */
+.btn:hover {
+  opacity: 0.8;
+}
+

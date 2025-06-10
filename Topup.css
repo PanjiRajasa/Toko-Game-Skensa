@@ -1,0 +1,86 @@
+/* RESET DASAR */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+/* HEADER */
+header nav ul { display: flex; gap: 30px; list-style: none; }
+header nav a.active { font-weight: 700; }
+.user-info { display: flex; align-items: center; gap: 15px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* MAIN TOPUP */
+main.topup { flex-direction: column; padding: 40px 0; }
+main.topup h2 { font-size: 2rem; margin-bottom: 20px; }
+main.topup section { margin-bottom: 40px; }
+main.topup h3 { font-size: 1.3rem; margin-bottom: 16px; }
+.blue-text { color: #1192F6; }
+.yellow-text { color: #F496F3; }
+
+.card-grid {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #e6e6e6;
+  color: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card-top { padding: 16px; text-align: center; }
+.card-top h4 { font-size: 1.2rem; }
+.card-top small { font-size: 0.85rem; }
+.card-top p { margin: 8px 0; }
+.card-top img { width: 40px; height: 40px; margin: auto; }
+.card-bottom {
+  background: #fff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-bottom span { font-size: 0.9rem; color: #666; }
+.card-bottom strong { font-size: 1rem; color: #007aff; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  color: #888;
+  margin-top: auto;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #1192F6, #8193F4, #F496F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.white-text { color: #fff; }
+.yellow-text { color: #F496F3; }
+.footer-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 16px 0;
+}

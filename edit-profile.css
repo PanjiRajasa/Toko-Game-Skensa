@@ -1,0 +1,141 @@
+/* RESET & BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0d0d0d;
+    color: #fff;
+    min-height: 100vh;
+  }
+  
+  header {
+  background: #0d0d0d;
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+}
+
+nav a.active {
+  font-weight: 700;
+}
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  .saldo {
+    margin-right: 10px;
+  }
+  .avatar-nav {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  /* FORM CONTAINER */
+  .form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+  .avatar-lg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 24px;
+  }
+  
+  /* LABEL & INPUT */
+  form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  form input,
+  form textarea {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+  form textarea {
+    resize: vertical;
+  }
+  
+  /* BUTTONS */
+  .buttons {
+    display: flex;
+    gap: 16px;
+  }
+  .btn {
+    flex: 1;
+    max-width: 180px;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 0;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn2 {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .btn2:hover {
+    background-color: #3b82f6;
+  }
+  
+  @media (max-width: 600px) {
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}

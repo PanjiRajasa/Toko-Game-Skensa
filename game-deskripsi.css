@@ -1,0 +1,193 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body & font */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #eee;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Navbar atas */
+/* HEADER */
+header {
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LINK & GRADIENT TEXT */
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.gradient-text {
+  background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+}
+
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav a { 
+  font-weight: 500; 
+}
+
+nav a.active { 
+  font-weight: 700; 
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+}
+
+.coins {
+  margin-right: 16px;
+  font-size: 14px;
+}
+
+/* Style coins dari kode kedua */
+.user-info .coins {
+  font-size: 0.95rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Style avatar dari kode kedua */
+.user-info .avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Card detail */
+.detail-card {
+  max-width: 900px;
+  margin: 24px auto;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  width: 100%;
+  object-fit: cover;
+}
+
+.info {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.price,
+.rating {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 16px 0;
+}
+
+/* Tombol */
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  background: #4A90E2;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  margin-top: 200px;
+}
+
+/* Responsif */
+@media (min-width: 600px) {
+  .detail-card {
+    flex-direction: row;
+  }
+
+  .cover {
+    width: 50%;
+    height: auto;
+  }
+
+  .info {
+    width: 50%;
+  }
+
+  .navbar {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 600px) {
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}

@@ -1,0 +1,163 @@
+/* ===================================================
+   RESET DASAR: hapus margin/padding default browser
+=================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* ===================================================
+     BODY: background gradasi + pola grid
+  =================================================== */
+  body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;                  /* flex centering konten */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;                  /* 100% tinggi layar */
+  
+    background-color: #ff8ac2;      /* warna dasar pink */
+    /* layer 1: garis vertikal tipis -> pola grid */
+    /* layer 2: garis horizontal tipis -> pola grid */
+    /* layer 3: gradasi radial pink */
+    background-image:
+      radial-gradient(circle at 50% 50%, #5E5E5E, #5E5E5E);
+    background-size:
+      40px 40px,                  /* ukuran kotak grid vertikal */
+      40px 40px,                  /* ukuran kotak grid horizontal */
+      cover;                      /* gradasi menutupi seluruh area */
+  }
+  
+  /* ===================================================
+     CONTAINER: dua panel berdampingan
+  =================================================== */
+  .container {
+    display: flex;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  
+  /* ===================================================
+     PANEL KIRI (IMAGE)
+  =================================================== */
+  .image-panel {
+    flex: 1;
+  }
+  .image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* ===================================================
+     PANEL KANAN (FORM)
+  =================================================== */
+  .form-panel {
+    flex: 1;
+    position: relative;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* back arrow */
+  .back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    color: #014EDD;
+    text-decoration: none;
+  }
+  
+  /* judul Register */
+  .form-panel h1 {
+    text-align: center;
+    color: #014EDD;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 28px;
+  }
+  
+  /* subjudul Sign In link */
+  .subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  .subtitle a {
+    color: #0069FF;
+    text-decoration: none;
+  }
+  .subtitle a:hover {
+    text-decoration: underline;
+  }
+  
+  /* form input */
+  .form-panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+  }
+  .form-panel input {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .form-panel input:focus {
+    border-color: #d100ce;
+  }
+  
+  /* baris link bawah (Forgot Password) */
+  .links-row {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+  }
+  .links-row a {
+    color: #0069FF;
+    text-decoration: none;
+  }
+  .links-row a:hover {
+    text-decoration: underline;
+  }
+  
+  /* tombol Sign Up */
+  .form-panel button {
+    margin-top: auto;
+    padding: 14px;
+    background-color: #014EDD;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+  .form-panel button:hover {
+    background-color: #e03fb8;
+  }
+  
+  /* ===== RESPONSIVE (<600px) ===== */
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+    }
+    .image-panel {
+      height: 200px;
+    }
+  }
+  
