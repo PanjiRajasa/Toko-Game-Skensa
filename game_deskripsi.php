@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+require 'config.php'; // Ini sudah mendefinisikan $pdo
 
 // Cek apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
@@ -12,27 +8,25 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Ambil ID game dari URL
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    // Redirect ke halaman beranda jika tidak ada id
+// Ambil ID game dari URL dan validasi
+$game_id = $_GET['id'] ?? null;
+if (!$game_id || !is_numeric($game_id)) {
     header("Location: homepage.php");
     exit();
 }
 
-$game_id = intval($_GET['id']);
+// Ambil data game berdasarkan ID (gunakan prepared statement)
+$sql_game = "SELECT * FROM game WHERE ID = ?";
+$stmt = $pdo->prepare($sql_game);
+$stmt->execute([$game_id]);
+$game = $stmt->fetch();
 
-// Query data game berdasarkan ID
-$sql_game = "SELECT * FROM game WHERE id = $game_id";
-$result_game = mysqli_query($conn, $sql_game);
-
-if (!$result_game || mysqli_num_rows($result_game) == 0) {
+if (!$game) {
     echo "Game tidak ditemukan.";
     exit();
 }
 
-$game = mysqli_fetch_assoc($result_game);
-
-// data dari login
+// Ambil ID user dari session
 $user_id = $_SESSION['user_id'];
 ?>
 
@@ -62,25 +56,20 @@ $user_id = $_SESSION['user_id'];
   </div>
 </header>
 
-
   <main class="detail-card">
     <img src="<?= htmlspecialchars($game['image']) ?>" alt="<?= htmlspecialchars($game['name']) ?>" class="cover">
     <div class="info">
       <h1 class="title"><?= htmlspecialchars($game['name']) ?></h1>
       <p class="price">Rp<?= number_format($game['price'], 0, ',', '.') ?></p>
       <p class="rating">Rating Usia: <b><?= htmlspecialchars($game['rating']) ?>+</b></p>
-      <p class="description">Deskripsi:<br/><?= htmlspecialchars($game['simple_description']) ?></p>
+      <p class="description">Deskripsi:<br/><?= nl2br(htmlspecialchars($game['simple_description'])) ?></p>
 
       <!-- Tambah keranjang button -->
-     <form method="POST" action="tambah_keranjang.php">
-  <input type="hidden" name="game_id" value="<?= $game['ID'] ?>">
-  <button type="submit" class="btn add-to-cart">Tambahkan ke Keranjang</button>
-</form>
+      <form method="POST" action="tambah_keranjang.php">
+        <input type="hidden" name="game_id" value="<?= $game['ID'] ?>">
+        <button type="submit" class="btn add-to-cart">Tambahkan ke Keranjang</button>
+      </form>
     </div>
   </main>
 </body>
 </html>
-
-<?php
-mysqli_close($conn);
-?>

@@ -13,7 +13,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user = $stmt->fetch();
 
-    if ($user && md5($password) == $user['password']) {
+    //cek kalau user ada (ga error)
+    if ($user) {
+        //verifikasi passowrd
+        $password_valid = false;
+
+        // Cek jika password disimpan sebagai MD5
+        if (strlen($user['password']) === 32 && ctype_xdigit($user['password'])) {
+            
+            // Verifikasi MD5
+            if (md5($password) === $user['password']) {
+                $password_valid = true;
+
+                // Migrasi ke Bcrypt
+                $newHash = password_hash($password, PASSWORD_BCRYPT);
+
+                // Update database dengan hash baru
+                update_user_password($user['ID'], $newHash);
+            }
+
+        } else {
+            // Verifikasi Bcrypt
+            $password_valid = password_verify($password, $user['password']);
+        }
+
+        //kalau password valid
+    if($password_valid) {
+
         // Cek level admin
         if ($user['level'] === 'admin') {
             $_SESSION['user_id'] = $user['ID'];
@@ -23,14 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             header("location: admin.php");  // arahkan ke halaman admin
             exit;
+
         } else {
             // Jika user tapi bukan admin
-             $_SESSION['user_id'] = $user['ID'];
+            $_SESSION['user_id'] = $user['ID'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_level'] = $user['level'];
             echo '<script>alert("Sukses Login"); window.location.href="homepage.php"</script>';
         }
+    } else {
+        echo '<script>alert("Wrong credentials")</script>';
+    }
     } else {
         echo '<script>alert("Wrong credentials")</script>';
     }
@@ -60,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- PANEL KANAN: Form login -->
     <div class="panel form-panel">
       <!-- Tombol kembali (arrow kiri) -->
-      <a href="./landing_page.php" class="back">&larr;</a>
+      <a href="./index.php" class="back">&larr;</a>
 
       <!-- Judul utama halaman -->
       <h1>Login</h1>

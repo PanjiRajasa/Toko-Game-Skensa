@@ -1,36 +1,35 @@
 <?php
-// Koneksi ke database
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
+require 'config.php';
 
-// Cek koneksi
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+// Ambil 10 game terbaru atau teratas untuk rekomendasi
+$sql_rekomendasi = "SELECT ID, name, price, image FROM game ORDER BY rating DESC LIMIT 10";
+$stmt_rekomendasi = $pdo->prepare($sql_rekomendasi);
+$stmt_rekomendasi->execute();
+$sepuluhgames = $stmt_rekomendasi->fetchAll(); // Rekomendasi
 
-// Ambil data dari tabel game
-$sql = "SELECT ID, name, price, image, simple_description, rating FROM game";
-$result = mysqli_query($conn, $sql);
+// Ambil semua game untuk list lengkap
+$sql_games = "SELECT ID, name, price, image FROM game";
+$stmt_games = $pdo->prepare($sql_games);
+$stmt_games->execute();
+$games = $stmt_games->fetchAll(); // List semua game
 
-$user_id = $_SESSION['user_id'];
-$sql2 = "SELECT * FROM user WHERE ID = $user_id";
-$result2 = mysqli_query($conn, $sql2);
+// Ambil data user dari session
+$user_id = $_SESSION['user_id'] ?? null;
 
-if ($result2 && mysqli_num_rows($result2) > 0) {
-    $user = mysqli_fetch_assoc($result2); // ✅ Ambil data jadi array asosiatif
+if ($user_id) {
+    $sql_user = "SELECT * FROM user WHERE ID = ?";
+    $stmt_user = $pdo->prepare($sql_user);
+    $stmt_user->execute([$user_id]);
+    $user = $stmt_user->fetch();
+    if (!$user) {
+        $user = ['name' => 'Pengguna'];
+    }
 } else {
-    $user = ['name' => 'Pengguna']; // fallback jika tidak ditemukan
+    $user = ['name' => 'Pengguna'];
 }
-
-$games = [];
-while ($row = mysqli_fetch_assoc($result)) {
-  $games[] = $row;
-  // echo $row;
-}
-
-//10 item pertama
-$sepuluhgames = array_slice($games, 0, 10);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -134,6 +133,3 @@ $sepuluhgames = array_slice($games, 0, 10);
 
 </html>
 
-<?php
-mysqli_close($conn);
-?>

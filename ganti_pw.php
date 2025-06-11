@@ -1,59 +1,60 @@
 <?php
 session_start();
-
-// Koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-// Cek koneksi
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require "config.php"; // Pastikan file ini membuat variabel $pdo untuk koneksi PDO
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari POST dan sanitasi
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $old_pw = md5(mysqli_real_escape_string($conn, $_POST['old-password']));       // hash dengan md5
-    $new_pw = md5(mysqli_real_escape_string($conn, $_POST['new-password']));       // hash dengan md5
-    $confirm_pw = md5(mysqli_real_escape_string($conn, $_POST['confirm-password'])); // hash dengan md5
+    $email         = trim($_POST['email'] ?? '');
+    $old_password  = $_POST['old-password'] ?? '';
+    $new_password  = $_POST['new-password'] ?? '';
+    $confirm_pw    = $_POST['confirm-password'] ?? '';
 
-    // Validasi password baru dan konfirmasi (bandingkan yang sudah di md5)
-    if ($new_pw !== $confirm_pw) {
-        die("<script>alert('Konfirmasi password tidak cocok.'); window.history.back();</script>");
+    // Validasi dasar
+    if (empty($email) || empty($old_password) || empty($new_password) || empty($confirm_pw)) {
+        echo "<script>alert('Semua kolom wajib diisi.'); window.history.back();</script>";
+        exit;
     }
 
-    // Ambil data user
-    $stmt = $conn->prepare("SELECT password FROM user WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if ($new_password !== $confirm_pw) {
+        echo "<script>alert('Konfirmasi password tidak cocok.'); window.history.back();</script>";
+        exit;
+    }
 
-    // Jika user ditemukan
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+    try {
+        // Ambil password lama
+        $stmt = $pdo->prepare("SELECT password FROM user WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verifikasi password lama (bandingkan md5 hash)
-        if ($old_pw === $user['password']) {
+        if ($user) {
+            // Verifikasi password lama
+            if (password_verify($old_password, $user['password'])) {
+                // Hash password baru
+                $hashed_new_pw = password_hash($new_password, PASSWORD_BCRYPT);
 
-            // Update password dan timestamp
-            $stmt_update = $conn->prepare("UPDATE user SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?");
-            $stmt_update->bind_param("ss", $new_pw, $email);
-
-            if ($stmt_update->execute()) {
-                echo "<script>alert('Kata sandi berhasil diperbarui. Silakan login kembali.'); window.location.href = './login.php';</script>";
-                exit();
+                // Update password
+                $update = $pdo->prepare("UPDATE user SET password = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?");
+                if ($update->execute([$hashed_new_pw, $email])) {
+                    echo "<script>alert('Kata sandi berhasil diperbarui. Silakan login kembali.'); window.location.href = './login.php';</script>";
+                    exit;
+                } else {
+                    echo "<script>alert('Gagal memperbarui password.'); window.history.back();</script>";
+                    exit;
+                }
             } else {
-                die("Gagal update password: " . $stmt_update->error);
+                echo "<script>alert('Kata sandi lama salah.'); window.history.back();</script>";
+                exit;
             }
-
         } else {
-            die("<script>alert('Kata sandi lama salah.'); window.history.back();</script>");
+            echo "<script>alert('Email tidak ditemukan.'); window.history.back();</script>";
+            exit;
         }
-    } else {
-        die("<script>alert('Email tidak ditemukan.'); window.history.back();</script>");
+    } catch (PDOException $e) {
+        echo "<script>alert('Terjadi kesalahan: " . $e->getMessage() . "'); window.history.back();</script>";
+        exit;
     }
 }
-
 ?>
+
 
 
 <!DOCTYPE html>

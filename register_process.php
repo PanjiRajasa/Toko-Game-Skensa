@@ -1,52 +1,49 @@
 <?php
+session_start();
 
-// Database connection
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
+include "config.php";
 
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-// Only process if form was submitted
+// Hanya jalankan jika request POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Get form data
-  $username = mysqli_real_escape_string($conn, $_POST['username']);
-  $name = mysqli_real_escape_string($conn, $_POST['name']);
-  $email = mysqli_real_escape_string($conn, $_POST['email']);
-  $password = $_POST['password'];
-  $password2 = $_POST['password2'];
+    // Ambil data dari form
+    $username   = trim($_POST['username'] ?? '');
+    $name       = trim($_POST['name'] ?? '');
+    $email      = trim($_POST['email'] ?? '');
+    $password   = $_POST['password'] ?? '';
+    $password2  = $_POST['password2'] ?? '';
 
-  // Simple validation
-  if ($password != $password2) {
-    echo '<script>alert("Konfirmasi password tidak cocok."); window.location.href="register.php";</script>';
-    exit(); 
-  }
+    // Validasi sederhana
+    if (!$username || !$name || !$email || !$password || !$password2) {
+        echo '<script>alert("Semua kolom wajib diisi."); window.location.href="register.php";</script>';
+        exit;
+    }
 
-  // Check if email exists
-  $check = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
-  if (mysqli_num_rows($check) > 0) {
-    echo '<script>alert("Email sudah terdaftar!"); window.location.href="register.php";</script>';
-    exit(); 
-  }
+    if ($password !== $password2) {
+        echo '<script>alert("Konfirmasi password tidak cocok."); window.location.href="register.php";</script>';
+        exit;
+    }
 
+    // Cek apakah email sudah digunakan
+    $stmt = $pdo->prepare("SELECT id FROM user WHERE email = ?");
+    $stmt->execute([$email]);
 
-  // Hash password (using simple md5 - not secure)
-  $hashed_password = md5($password);
+    if ($stmt->rowCount() > 0) {
+        echo '<script>alert("Email sudah terdaftar!"); window.location.href="register.php";</script>';
+        exit;
+    }
 
-  // Insert user
-  $sql = "INSERT INTO user (username, name, email, password, level) 
-          VALUES ('$username', '$name', '$email', '$hashed_password', 'user')";
+    // Hash password secara aman
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-  if (mysqli_query($conn, $sql)) { 
-    echo '<script>alert("Registrasi Sukses! Silahkan Login."); window.location.href="login.php";</script>';
-    exit(); 
-  } else {
-    $_SESSION['error'] = "Registration failed: " . mysqli_error($conn);
-    header("Location: register.php");
-  }
+    // Insert user
+    $stmt = $pdo->prepare("INSERT INTO user (username, name, email, password, level) VALUES (?, ?, ?, ?, 'user')");
 
-  mysqli_close($conn);
-  exit();
+    if ($stmt->execute([$username, $name, $email, $hashed_password])) {
+        echo '<script>alert("Registrasi Sukses! Silahkan Login."); window.location.href="login.php";</script>';
+        exit;
+    } else {
+        echo '<script>alert("Terjadi kesalahan saat registrasi."); window.location.href="register.php";</script>';
+        exit;
+    }
 }
 ?>

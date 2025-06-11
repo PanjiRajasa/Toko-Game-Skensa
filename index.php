@@ -35,7 +35,7 @@
         Dilengkapi  dengan fitur game dengan quality yang bagus.
         Sekarang Mulailah Petualanganmu dengan pengalaman Yang sangat menyenangkan!</p>
       <div class="buttons">
-        <a href="register.php" class="btn primary">Mulai</a>
+        <a href="./register.php" class="btn primary">Mulai</a>
       </div>
     </div>
   </section>

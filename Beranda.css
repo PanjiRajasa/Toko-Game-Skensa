@@ -218,3 +218,223 @@ footer {
     align-items: center;
   }
 }
+/* RESET & DASAR */
+* { 
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;  
+}
+
+body {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.4;
+}
+
+/* CONTAINER */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container1 {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10%;
+}
+
+
+/* HEADER */
+header {
+  background: #0d0d0d;
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LINK & GRADIENT TEXT */
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.gradient-text {
+    background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* LOGO AND IMG */
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+}
+
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav a { 
+  font-weight: 500; 
+}
+
+nav a.active { 
+  font-weight: 700; 
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* HERO */
+.hero {
+  text-align: left;
+  padding: 80px 0;
+}
+.hero .container {
+  max-width: 600px;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.hero p {
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #2765f1;
+  color: #fff;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: opacity .3s;
+}
+.btn:hover { opacity: .8; }
+
+/* SECTION HEADERS */
+section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+section .subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  opacity: .8;
+}
+
+/* GRID LAYOUT */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 24px;
+}
+
+/* KARTU */
+.card {
+  background: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* penting jika ada info + konten variatif */
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.card .info {
+  padding: 14px;
+  background: #e6e6e6;
+  color: #111;
+  flex-grow: 1;
+  min-height: 80px; /* atau tinggi yang kamu mau */
+}
+.list-game .card .info {
+  background: #5b9eff;
+  color: #111;
+}
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+.card p { font-size: .95rem; }
+
+/* SPESIAL: REKOMENDASI VS LIST */
+.rekomendasi .card .info { 
+  background: #f2f2f2; 
+}
+
+.list-game .card .info { 
+  background: #5b9eff; 
+}
+
+/* FOOTER */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 40px 0 20px;
+    color: #888;
+    font-size: .9rem;
+  }
+  
+.gradient-text {
+  background: linear-gradient(90deg,#1192F6,#8193F4,#F496F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.white-text { 
+  color: #fff; 
+}
+
+.yellow-text { 
+  color: #FFCC33; 
+}
+  
+.footer-nav ul { 
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
+  list-style: none; 
+  margin: 15px 0; 
+}
+
+.footer-nav ul a:hover {
+  color: #3b82f6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero { padding: 40px 0; }
+  .hero h1 { font-size: 2.2rem; }
+}
+
+@media (max-width: 600px) {
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}

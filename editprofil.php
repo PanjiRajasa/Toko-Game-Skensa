@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+require "config.php"; // File ini harus membuat koneksi PDO dalam variabel $pdo
 
 // Cek apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
@@ -13,41 +9,86 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$success = '';
+$error = '';
 
 // Jika form disubmit, lakukan update
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $photo = mysqli_real_escape_string($conn, $_POST['photo']);
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $bio = mysqli_real_escape_string($conn, $_POST['bio']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $photo    = $_POST['photo'] ?? '';
+    $name     = $_POST['name'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $email    = $_POST['email'] ?? '';
+    $bio      = $_POST['bio'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Bangun query update
-    $update_sql = "UPDATE user 
-                   SET image='$photo', name='$name', username='$username', email='$email', description='$bio'";
+    try {
+        // Jika password tidak kosong, update password juga
+        if (!empty($password)) {
+            $hashed_password = md5($password); // Bisa ganti ke password_hash() di masa depan
+            $sql = "
+                UPDATE user 
+                SET image = :photo,
+                    name = :name,
+                    username = :username,
+                    email = :email,
+                    description = :bio,
+                    password = :password
+                WHERE ID = :user_id
+            ";
 
-    // Jika password diisi, update juga
-    if (!empty($password)) {
-        $hashed_password = md5($password);
-        $update_sql .= ", password='$hashed_password'";
-    }
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':photo'    => $photo,
+                ':name'     => $name,
+                ':username' => $username,
+                ':email'    => $email,
+                ':bio'      => $bio,
+                ':password' => $hashed_password,
+                ':user_id'  => $user_id
+            ]);
+        } else {
+            // Tanpa update password
+            $sql = "
+                UPDATE user 
+                SET image = :photo,
+                    name = :name,
+                    username = :username,
+                    email = :email,
+                    description = :bio
+                WHERE ID = :user_id
+            ";
 
-    $update_sql .= " WHERE ID=$user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':photo'    => $photo,
+                ':name'     => $name,
+                ':username' => $username,
+                ':email'    => $email,
+                ':bio'      => $bio,
+                ':user_id'  => $user_id
+            ]);
+        }
 
-    if (mysqli_query($conn, $update_sql)) {
-        // Refresh data dari database
-        $success = "Profil berhasil diperbarui.";
-    } else {
-        $error = "Gagal memperbarui profil: " . mysqli_error($conn);
+        echo'<script>alert("Profil berhasil diperbarui."); window.location.href="profil.php"</script>';
+    } catch (PDOException $e) {
+        echo'<script>alert("Gagal memperbarui profil."); window.location.href="editprofil.php"</script>';
     }
 }
 
-// Ambil data user setelah/atau sebelum update
-$sql = "SELECT * FROM user WHERE ID = $user_id";
-$result = mysqli_query($conn, $sql);
-$user = mysqli_fetch_assoc($result);
+// Ambil data user
+try {
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE ID = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        die("User tidak ditemukan.");
+    }
+} catch (PDOException $e) {
+    die("Gagal mengambil data user: " . $e->getMessage());
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -79,10 +120,9 @@ $user = mysqli_fetch_assoc($result);
 <main>
   <section class="form-container">
     <!-- Avatar -->
-    <img src="<?= htmlspecialchars($user['image'] ?? 'avatar.png') ?>" alt="Avatar Profil" class="avatar-lg">
+    <img src="<?= htmlspecialchars($user['image'] ?? './image/avatar.jpg') ?>" alt="Avatar Profil" class="avatar-lg">
 
-    <?php if (isset($success)) echo '<script>alert("'.$success.'"); window.location.href="./profil.php"</script>'; ?>
-    <?php if (isset($error)) echo '<script>alert("'.$error.'"); window.location.href="./editprofil.php"</script>'; ?>
+    
 
     <form action="editprofil.php" method="post">
       <label for="photo">Link Foto Profil</label>
@@ -113,7 +153,3 @@ $user = mysqli_fetch_assoc($result);
 
 </body>
 </html>
-
-<?php
-mysqli_close($conn);
-?>

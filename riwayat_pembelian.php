@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+require 'config.php'; // Pastikan file ini mengatur $pdo sebagai instance PDO
 
 $user_id = $_SESSION['user_id'] ?? null;
 if (!$user_id) {
@@ -12,21 +8,21 @@ if (!$user_id) {
     exit();
 }
 
-// Ambil data pembelian user dari tabel checkout, gabung dengan data game
-$query = mysqli_query($conn, "
+// Ambil data pembelian user dari tabel checkout + game
+$sql = "
     SELECT 
-        *
+        checkout.*, game.name, game.image, game.price 
     FROM checkout
     LEFT JOIN game ON checkout.game_ID = game.ID
-    WHERE checkout.user_id = '$user_id'
+    WHERE checkout.user_id = ?
     ORDER BY checkout.date_checkout DESC
-");
+";
 
-$orders = [];
-while ($row = mysqli_fetch_assoc($query)) {
-    $orders[] = $row;
-}
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$user_id]);
+$orders = $stmt->fetchAll();
 ?>
+
 
 
 <!DOCTYPE html>

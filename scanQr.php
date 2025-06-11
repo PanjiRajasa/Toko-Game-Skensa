@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+require "config.php"; // File ini harus mendefinisikan variabel $pdo
 
 // Pastikan user login
 $user_id = $_SESSION['user_id'] ?? null;
@@ -20,27 +16,42 @@ if (empty($cart)) {
     exit;
 }
 
-// Ambil detail game untuk menghitung harga per item
-$ids = implode(',', array_keys($cart));
-$sql = "SELECT ID, price FROM game WHERE ID IN ($ids)";
-$result = mysqli_query($conn, $sql);
+try {
+    // Ambil detail game untuk menghitung total harga
+    $ids = implode(',', array_map('intval', array_keys($cart))); // Bersihkan ID agar hanya angka
 
-$now = date('Y-m-d H:i:s');
+    $sql = "SELECT ID, price FROM game WHERE ID IN ($ids)";
+    $stmt = $pdo->query($sql);
+    $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $game_id = $row['ID'];
-    $quantity = $cart[$game_id];
-    $price = $row['price'] * $quantity;
+    $now = date('Y-m-d H:i:s');
 
-    // Masukkan ke tabel checkout
-    $insert = "INSERT INTO checkout (price, date_checkout, updated_at, game_ID, user_id) 
-               VALUES ('$price', '$now', '$now', '$game_id', '$user_id')";
-    mysqli_query($conn, $insert);
+    $insertSql = "INSERT INTO checkout (price, date_checkout, updated_at, game_ID, user_id)
+                  VALUES (:price, :date_checkout, :updated_at, :game_ID, :user_id)";
+    $insertStmt = $pdo->prepare($insertSql);
+
+    foreach ($games as $game) {
+        $game_id = $game['ID'];
+        $quantity = $cart[$game_id];
+        $price = $game['price'] * $quantity;
+
+        // Eksekusi insert
+        $insertStmt->execute([
+            ':price' => $price,
+            ':date_checkout' => $now,
+            ':updated_at' => $now,
+            ':game_ID' => $game_id,
+            ':user_id' => $user_id
+        ]);
+    }
+
+    // Bersihkan keranjang
+    unset($_SESSION['cart']);
+} catch (PDOException $e) {
+    die("Terjadi kesalahan saat proses checkout: " . $e->getMessage());
 }
-
-// Bersihkan keranjang
-unset($_SESSION['cart']);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

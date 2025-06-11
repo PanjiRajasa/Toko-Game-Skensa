@@ -1,10 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "database_toko_game");
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+require "config.php"; // Harus membuat $pdo sebagai koneksi PDO
 
 // Cek apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
@@ -12,34 +8,58 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-//data dari login
 $user_id = $_SESSION['user_id'];
+$success = '';
+$error = '';
 
 // Jika form disubmit, lakukan update
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $photo = mysqli_real_escape_string($conn, $_POST['photo']);
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $bio = mysqli_real_escape_string($conn, $_POST['bio']);
+    $photo    = $_POST['photo'] ?? '';
+    $name     = $_POST['name'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $email    = $_POST['email'] ?? '';
+    $bio      = $_POST['bio'] ?? '';
 
-    $update_sql = "UPDATE user 
-                   SET image='$photo', name='$name', username='$username', email='$email', description='$bio'
-                   WHERE ID=$user_id";
+    try {
+        $stmt = $pdo->prepare("
+            UPDATE user 
+            SET image = :photo,
+                name = :name,
+                username = :username,
+                email = :email,
+                description = :bio
+            WHERE ID = :user_id
+        ");
 
-    if (mysqli_query($conn, $update_sql)) {
-        // Refresh data dari database
+        $stmt->execute([
+            ':photo'    => $photo,
+            ':name'     => $name,
+            ':username' => $username,
+            ':email'    => $email,
+            ':bio'      => $bio,
+            ':user_id'  => $user_id
+        ]);
+
         $success = "Profil berhasil diperbarui.";
-    } else {
-        $error = "Gagal memperbarui profil: " . mysqli_error($conn);
+    } catch (PDOException $e) {
+        $error = "Gagal memperbarui profil: " . $e->getMessage();
     }
 }
 
-// Ambil data user setelah/atau sebelum update
-$sql = "SELECT * FROM user WHERE ID = $user_id";
-$result = mysqli_query($conn, $sql);
-$user = mysqli_fetch_assoc($result);
+// Ambil data user
+try {
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE ID = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        die("User tidak ditemukan.");
+    }
+} catch (PDOException $e) {
+    die("Gagal mengambil data user: " . $e->getMessage());
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -72,7 +92,7 @@ $user = mysqli_fetch_assoc($result);
 
     <main>
       <section class="profile">
-        <img src="<?= htmlspecialchars($user['image'] ?? 'avatar.png') ?>" alt="Avatar" class="profile-img">
+        <img src="<?= htmlspecialchars($user['image'] ?? './image/avatar.jpg') ?>" alt="Avatar" class="profile-img">
         <div class="profile-text">
           <h1><?= htmlspecialchars($user['name']) ?></h1>
           <p class="username"> <?= htmlspecialchars($user['username']) ?> </p>
