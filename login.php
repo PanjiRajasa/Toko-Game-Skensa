@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $newHash = password_hash($password, PASSWORD_BCRYPT);
 
                 // Update database dengan hash baru
-                update_user_password($user['ID'], $newHash);
+                $stmt = $pdo->prepare("UPDATE user SET password = ? WHERE ID = ?");
+                $stmt->execute([$newHash, $user['ID']]);
             }
 
         } else {
