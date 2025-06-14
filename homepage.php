@@ -47,7 +47,7 @@ if ($user_id) {
 <header>
   <div class="container">
     <div class="logo">
-      <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
+      <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " style='cursor:pointer;'/>
     </div>
     <nav>
       <ul>

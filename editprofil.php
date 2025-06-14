@@ -104,7 +104,7 @@ try {
 <header>
   <div class="container">
     <div class="logo">
-        <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
+        <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " style='cursor: pointer;'/>
     </div>
   <nav>
       <ul>
@@ -120,13 +120,13 @@ try {
 <main>
   <section class="form-container">
     <!-- Avatar -->
-    <img src="<?= htmlspecialchars($user['image'] ?? './image/avatar.jpg') ?>" alt="Avatar Profil" class="avatar-lg">
+    <img src="<?= !empty($user['image']) ? htmlspecialchars($user['image']) : './image/avatar.jpg' ?>" alt="Avatar Profil" class="avatar-lg">
 
     
 
     <form action="editprofil.php" method="post">
       <label for="photo">Link Foto Profil</label>
-      <input type="url" id="photo" name="photo" value="<?= htmlspecialchars($user['image']) ?>">
+      <input type="url" id="photo" name="photo" value="<?= htmlspecialchars($user['image']) ?>" placeholder="https://example.com/image.jpg">
 
       <label for="name">Nama</label>
       <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['name']) ?>">

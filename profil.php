@@ -77,7 +77,7 @@ try {
     <header>
         <div class="container">
         <div class="logo">
-            <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " />
+            <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " style='cursor:pointer;'/>
         </div>
         <nav>
             <ul>
@@ -92,7 +92,8 @@ try {
 
     <main>
       <section class="profile">
-        <img src="<?= htmlspecialchars($user['image'] ?? './image/avatar.jpg') ?>" alt="Avatar" class="profile-img">
+        <img src="<?= !empty($user['image']) ? htmlspecialchars($user['image']) : './image/avatar.jpg' ?>" alt="Avatar Profil" class="profile-img">
+
         <div class="profile-text">
           <h1><?= htmlspecialchars($user['name']) ?></h1>
           <p class="username"> <?= htmlspecialchars($user['username']) ?> </p>

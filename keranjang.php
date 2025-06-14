@@ -44,7 +44,7 @@ if (!empty($cart)) {
 <header>
   <div class="container">
     <div class="logo">
-      <img src="image/Togame.jpg" alt="Togame Store Logo" />
+      <img src="image/Togame.jpg" alt="Togame Store Logo" onclick="window.location.href='./homepage.php' " style='cursor:pointer;'/>
     </div>
     <nav>
       <ul>
