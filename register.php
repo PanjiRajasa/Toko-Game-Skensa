@@ -2,7 +2,7 @@
 include "register_process.php";
 
 // Start session at the top of the file
-session_start();
+// session_start();
 
 // Check for success/error messages from redirect
 $error = $_GET['error'] ?? '';

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'config.php'; // Pastikan file ini mengatur $pdo sebagai instance PDO
 
 $user_id = $_SESSION['user_id'] ?? null;
@@ -10,12 +9,14 @@ if (!$user_id) {
 
 // Ambil data pembelian user dari tabel checkout + game
 $sql = "
-    SELECT 
-        checkout.*, game.name, game.image, game.price 
-    FROM checkout
-    LEFT JOIN game ON checkout.game_ID = game.ID
-    WHERE checkout.user_id = ?
-    ORDER BY checkout.date_checkout DESC
+    SELECT c.ID, c.price, c.date_checkout, g.image, g.name, u.name as username, u.email 
+
+    FROM checkout as c
+    INNER JOIN user as u ON c.user_id = u.ID
+    INNER JOIN game as g ON c.game_id = g.ID
+
+    WHERE c.user_id = ?
+    ORDER BY c.date_checkout DESC
 ";
 
 $stmt = $pdo->prepare($sql);
@@ -59,16 +60,26 @@ $orders = $stmt->fetchAll();
     <p>Kamu belum melakukan pembelian.</p>
   <?php else: ?>
     <?php foreach ($orders as $order): ?>
+
       <section class="order-card">
-        <h3>Order ID: <?= $order['ID'] ?></h3>
+        <h3><?= $order['username'] ?></h3>
+        <h4><?= $order['email'] ?></h4>
+        <br/>
+
         <div class="details">
+
+        <!-- Gambar -->
           <div class="left">
             <img src="<?= htmlspecialchars($order['image']) ?>" alt="<?= htmlspecialchars($order['name']) ?>" width="100">
           </div>
+        
+          <!-- Nama game -->
           <div class="center">
             <p><strong>Game:</strong> <?= htmlspecialchars($order['name']) ?></p>
             <p><strong>Tanggal:</strong> <?= date("d M Y, H:i", strtotime($order['date_checkout'])) ?></p>
           </div>
+
+          <!-- Harga -->
           <div class="right">
             <p><strong>Harga:</strong> Rp<?= number_format($order['price'], 0, ',', '.') ?></p>
             <p><strong>Total:</strong> <span class="bold">Rp<?= number_format($order['price'] * 1.1, 0, ',', '.') ?></span></p>

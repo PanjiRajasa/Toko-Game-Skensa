@@ -1,0 +1,140 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 10px;
+}
+
+/* Minimalist navbar */
+
+/* Tombol Minimalis */
+a.button-navbar {
+  background: transparent;
+  color: #3498db; /* Warna biru yang sama, tapi sebagai teks */
+  padding: 6px 12px;
+  text-decoration: none;
+  border: 1px solid #3498db; /* Garis tipis dengan warna biru */
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 8px;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500; /* Sedikit tebal */
+}
+
+/* Efek hover */
+a.button-navbar:hover {
+  background: #3498db;
+  color: white;
+}
+
+/* Tambahan untuk fokus/aksesibilitas */
+a.button-navbar:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+}
+
+/* Title admin */
+.admin-title {
+    font-weight: 600;
+    font-size: 28px;
+    color: #2c3e50;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+/* Tabel utama */
+table {
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Sel header dan data */
+th,
+td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+  word-break: break-word;
+}
+
+/* Header tabel */
+th {
+  background: #eee;
+}
+
+.welcome-text {
+    color: #333;
+    font-size: 24px;
+}
+
+.username {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Button logout */
+.button-logout {
+    background: #db3434;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    display: inline-block;
+    margin-left: 8px;
+    transition: all 0.3s ease;
+}
+
+.button-logout:hover, a.button.delete:hover {
+    color: #683833;
+    border-bottom-color: #e74c3c;
+}
+
+/* Tombol biru */
+a.button {
+  background: #3498db;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+
+/* tombol delete */
+a.button.delete {
+  background: #e74c3c;
+}
+
+/* Form inline */
+form.inline {
+  display: inline;
+}
+
+/* Input dasar */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  table {
+    overflow-x: auto;
+  }
+  
+}

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<script> alert("' . $error . '"); </script>';
         } else {
             // Insert data
-            $password_hash = md5($password);
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $stmt = $pdo->prepare("INSERT INTO user (username, name, email, description, level, password, image, created_at, updated_at) 
             VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
             $stmt->execute([$username, $name, $email, $description, $level, $password_hash, $image]);

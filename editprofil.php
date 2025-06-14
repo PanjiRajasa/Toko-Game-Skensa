@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Jika password tidak kosong, update password juga
         if (!empty($password)) {
-            $hashed_password = md5($password); // Bisa ganti ke password_hash() di masa depan
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT); // Bisa ganti ke password_hash() di masa depan
             $sql = "
                 UPDATE user 
                 SET image = :photo,

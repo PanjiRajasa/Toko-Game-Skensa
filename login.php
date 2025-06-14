@@ -125,11 +125,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="links-row">
           <!-- Link pendaftaran akun baru -->
           <span>
-            Belom Mempunyai Akun?
+            Belum Mempunyai Akun?
             <a href="register.php">Daftar</a>
           </span>
           <!-- Link lupa password -->
-          <a href="./ganti_pw.php" class="forgot">Lupa Kata Sandi?</a>
+          <a href="./php/forgot-password.php" class="forgot">Lupa Kata Sandi?</a>
         </div>
 
         <!-- Tombol kirim form -->
