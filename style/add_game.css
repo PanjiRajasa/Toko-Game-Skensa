@@ -59,7 +59,7 @@ textarea {
 
 /* Tombol */
 button[type="submit"],
-a[href="admin.php"] {
+a.cancel-button {
   display: inline-block;
   margin-top: 10px;
   padding: 10px 20px;
@@ -80,12 +80,12 @@ button[type="submit"]:hover {
   background-color: #2980b9;
 }
 
-a[href="admin.php"] {
+a.cancel-button {
   background-color: #bdc3c7;
   color: #2c3e50;
 }
 
-a[href="admin.php"]:hover {
+a.cancel-button:hover {
   background-color: #95a5a6;
   color: white;
 }

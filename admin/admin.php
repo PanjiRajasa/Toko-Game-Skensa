@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require '../config.php';
 
 // Proteksi halaman hanya untuk admin
 if (!isset($_SESSION['user_level']) || $_SESSION['user_level'] !== 'admin') {
@@ -111,7 +111,7 @@ $totalPages = ceil($totalUsers / $perPage);
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Admin Dashboard</title>
 
-  <link rel="stylesheet" href="./style/admin.css"/>
+  <link rel="stylesheet" href="../style/admin.css"/>
 
   <script>
     function confirmDelete(item, id) {
@@ -128,8 +128,8 @@ $totalPages = ceil($totalUsers / $perPage);
   
   <nav>
     <!-- Link tambah data -->
-    <a href="add_user.php" class="button-navbar">Tambah User</a>
-    <a href="add_game.php" class="button-navbar">Tambah Game</a>
+    <a href="../add_user.php" class="button-navbar">Tambah User</a>
+    <a href="../add_game.php" class="button-navbar">Tambah Game</a>
 
     <h1 class="admin-title">Admin Dashboard</h1>
 
@@ -145,9 +145,9 @@ $totalPages = ceil($totalUsers / $perPage);
 
   <!-- Link Pindah Page -->
   <a href="./admin.php" class="button">Page User</a>
-  <a href="./admin_game.php" class="button">Page Game</a>
-  <a href="./admin_checkout.php" class="button">Page Checkout</a>
-  <a  class="button-logout" href="logout.php">Logout</a>
+  <a href="../admin_game.php" class="button">Page Game</a>
+  <a href="../admin_checkout.php" class="button">Page Checkout</a>
+  <a  class="button-logout" href="../logout.php">Logout</a>
 
   <br/>
   <br/>

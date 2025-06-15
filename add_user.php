@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
             $stmt->execute([$username, $name, $email, $description, $level, $password_hash, $image]);
 
-            header("Location: admin.php");
+            header("Location: ./admin/admin.php");
             exit;
         }
     }
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </label><br><br>
 
         <button type="submit">Tambah User</button>
-        <a href="admin.php">Batal</a>
+        <a href="./admin/admin.php" class="cancel-button">Batal</a>
     </form>
 </body>
 </html>

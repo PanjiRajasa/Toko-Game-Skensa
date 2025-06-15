@@ -144,7 +144,7 @@ $totalPages = ceil($totalGames / $perPage);
 
 
   <!-- Link Pindah Page -->
-  <a href="./admin.php" class="button">Page User</a>
+  <a href="./admin/admin.php" class="button">Page User</a>
   <a href="./admin_game.php" class="button">Page Game</a>
   <a href="./admin_checkout.php" class="button">Page Checkout</a>
   <a  class="button-logout" href="logout.php">Logout</a>

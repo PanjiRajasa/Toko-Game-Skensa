@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $stmt = $pdo->prepare("INSERT INTO game (name, price, image, simple_description, rating, created_at, updated_at) VALUES (?, ?, ?, ?, ?, NOW(), NOW())");
         $stmt->execute([$name, $price, $image, $simple_description, $rating]);
-        header("Location: admin.php");
+        header("Location: ./admin/admin.php");
         exit;
     }
 }
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </label><br><br>
 
     <button type="submit">Tambah Game</button>
-    <a href="admin.php">Batal</a>
+    <a href="./admin/admin.php" class="cancel-button">Batal</a>
 </form>
 </body>
 </html>
