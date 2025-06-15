@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ubah Kata Sandi</title>
     <!-- 1. Hubungkan CSS -->
-    <link rel="stylesheet" href="change-password.css">
+    <link rel="stylesheet" href="./style/change-password.css">
     </head>
     <body>
 

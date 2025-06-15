@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Pengguna</title>
-    <link rel="stylesheet" href="add_user.css">
+    <link rel="stylesheet" href="./style/add_user.css">
 </head>
 <body>
         <h1>Tambah User Baru</h1>
