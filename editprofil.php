@@ -96,7 +96,7 @@ try {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Edit Profil</title>
-  <link rel="stylesheet" href="edit-profile.css">
+  <link rel="stylesheet" href="./style/edit-profile.css">
 </head>
 <body>
 

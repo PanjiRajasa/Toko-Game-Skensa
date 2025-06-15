@@ -59,7 +59,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan QR</title>
-    <link rel="stylesheet" href="./qrcode.css"/>
+    <link rel="stylesheet" href="./style/qrcode.css"/>
 </head>
 <body>
   <h1 style="text-align:center; margin-bottom: 20px;">Silakan Scan QR untuk Pembayaran</h1>

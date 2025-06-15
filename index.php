@@ -12,7 +12,7 @@
 
 
   <!-- Link ke file CSS eksternal -->
-  <link rel="stylesheet" href="./LandingPage.css" />
+  <link rel="stylesheet" href="./style/LandingPage.css" />
 </head>
 <body>
   <!-- Container utama untuk hero section -->

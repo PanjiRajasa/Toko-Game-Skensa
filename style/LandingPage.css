@@ -15,7 +15,7 @@ body {
   position: relative;
   width: 100%;
   height: 100vh; /* setinggi viewport */
-  background: url('image/Landingpage.jpg') center/cover no-repeat;
+  background: url(../image/Landingpage.jpg) center/cover no-repeat;
   display: flex;
   flex-direction: column;
 }
