@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login Page</title>
   <!-- Hubungkan ke file CSS utama -->
-  <link rel="stylesheet" href="Login.css"/>
+  <link rel="stylesheet" href="./style/Login.css"/>
 </head>
 <body>
   <!-- Wrapper utama untuk dua panel (gambar & form) -->
