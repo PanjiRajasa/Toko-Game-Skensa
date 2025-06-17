@@ -1,1 +1,8 @@
 comparable/
+vendor/
+composer.json
+composer.lock
+mailer.php
+.env
+.htaccess
+test/
